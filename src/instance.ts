@@ -263,14 +263,11 @@ function setupBabel(loaderConfig: LoaderConfig): any {
 }
 
 function applyDefaults(configFilePath: string, compilerConfig: TsConfig, loaderConfig: LoaderConfig) {
-    compilerConfig.typingOptions.exclude = compilerConfig.typingOptions.exclude || [];
-    let initialFiles = compilerConfig.fileNames;
-
     _.defaults(compilerConfig.options, {
         sourceMap: true,
         verbose: false,
         skipDefaultLibCheck: true,
-        suppressOutputPathCheck: true,
+        suppressOutputPathCheck: true
     });
 
     _.defaults(compilerConfig.options, {
@@ -278,18 +275,15 @@ function applyDefaults(configFilePath: string, compilerConfig: TsConfig, loaderC
     });
 
     _.defaults(loaderConfig, {
-        externals: [],
-        doTypeCheck: true,
         sourceMap: true,
         verbose: false,
     });
 
     delete compilerConfig.options.outDir;
+    delete compilerConfig.options.inlineSourceMap;
     delete compilerConfig.options.outFile;
     delete compilerConfig.options.out;
     delete compilerConfig.options.noEmit;
-
-    loaderConfig.externals.push.apply(loaderConfig.externals, initialFiles);
 }
 
 export interface Configs {
